@@ -1,0 +1,26 @@
+{
+  "name": "global-event",
+  "version": "0.1.0",
+  "description": "Global event.",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:lib": "babel src --out-dir lib",
+    "build": "",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "global",
+    "event"
+  ],
+  "author": "Require Sun <kelvinsen@outlook.com> (https://github.com/RequireSun)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-core": "^6.4.0",
+    "babel-loader": "^6.2.1",
+    "rimraf": "^2.5.0",
+    "webpack": "^1.12.11"
+  }
+}
