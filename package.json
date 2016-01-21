@@ -1,12 +1,12 @@
 {
   "name": "global-event",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Global event.",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:lib": "babel src --out-dir lib",
+    "build:lib": "babel -d lib/ src/",
     "build:umd": "webpack src/index.js dist/global-event.js --config webpack.config.development.js",
     "build:umd:min": "webpack src/index.js dist/global-event.min.js --config webpack.config.production.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
@@ -19,9 +19,9 @@
   "author": "Require Sun <kelvinsen@outlook.com> (https://github.com/RequireSun)",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^6.3.26",
-    "babel-core": "^6.4.0",
-    "babel-loader": "^6.2.1",
+    "babel": "^5.5.8",
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
     "rimraf": "^2.5.0",
     "webpack": "^1.12.11"
   }

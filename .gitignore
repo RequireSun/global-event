@@ -35,3 +35,5 @@ node_modules
 
 # kelvin edited for .idea
 .idea
+lib
+dist
