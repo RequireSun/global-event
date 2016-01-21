@@ -4,6 +4,7 @@ Global event.
 # How to use
 
 1. __on__
+
    Adds a listener function to the specified event.
    + __type__ 
    
@@ -18,11 +19,16 @@ Global event.
    + __[namespace]__
    
      Namespace of the listener.
+     
 2. __emit__
+
    + __type__
-   + __[...rest arguments]__
+   
+   + __[...arguments]__
      the arguments
+     
 3. __off__
+
    Removes listener functions of the specified event.
    + __type__ 
    
