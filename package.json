@@ -7,7 +7,9 @@
     "clean": "rimraf lib dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:lib": "babel src --out-dir lib",
-    "build": "",
+    "build:umd": "webpack src/index.js dist/global-event.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js dist/global-event.min.js --config webpack.config.production.js",
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "prepublish": "npm run clean && npm run build"
   },
   "keywords": [
