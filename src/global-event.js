@@ -41,11 +41,11 @@ export function off (type, namespace) {
 /**
  * 事件触发
  * @param type      事件名
+ * @param args   传递给处理函数的参数
  * @returns {Array} 存有每个事件返回值的数组
  */
-export function emit (type) {
-    let args = Array.prototype.slice.call(arguments, 1),
-        e = _events[type] || [],
+export function emit (type, ...args) {
+    let e = _events[type] || [],
         returnValues = [];
     for (let i = 0, l = e.length; i < l; ++i) {
         let callback = e[i];
