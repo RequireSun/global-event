@@ -19,6 +19,7 @@ export function on (type, callback, context = null, namespace = Date.now()) {
         fn: callback,
         context: context
     });
+    return this;
 }
 /**
  * 事件解绑
@@ -37,6 +38,7 @@ export function off (type, namespace) {
     } else {
         delete _events[type];
     }
+    return this;
 }
 /**
  * 事件触发
