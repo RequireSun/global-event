@@ -23,9 +23,10 @@ Adds a listener function to the specified event.
 ## emit
 
 + __type__
-  Name of the event you want to add the listeners from.
 
+  Name of the event you want to add the listeners from.
 + __[...arguments]__
+
   the arguments
      
 ## off
@@ -76,4 +77,5 @@ emit(
 # Update
 
 + 2016-03-05
+
   `on` and `off` functions now can call in chained.
