@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/index.js",
     "build:lib": "babel -d lib/ src/",
     "build:umd": "webpack src/index.js dist/global-event.js --config webpack.config.development.js",
     "build:umd:min": "webpack src/index.js dist/global-event.min.js --config webpack.config.production.js",
