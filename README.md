@@ -27,7 +27,7 @@ Adds a listener function to the specified event.
   Name of the event you want to add the listeners from.
 + __[...arguments]__
 
-  the arguments
+  Arguments you want to pass to the listener.
      
 ## off
 
@@ -35,7 +35,7 @@ Removes listener functions of the specified event.
 + __type__ 
 
   Name of the event you want to remove the listeners from.
-+ __namespace__ 
++ __[namespace]__ 
 
   Namespace of the listeners you want to remove. 
   If it doesn't provide, the function will remove all the listeners of the specified event.
@@ -64,7 +64,7 @@ emit('logEvent', 'The information');
 // output 'The information 2'
 
 off(
-    'logEvent'
+    'logEvent',
     'demoSpace'
 ).
 emit(
@@ -72,10 +72,22 @@ emit(
     'Another information'
 );
 // output 'Another information 2'
+
+off(
+    'logEvent'
+).
+emit(
+    'logEvent',
+    'Third information'
+);
+// no output
 ```
 
 # Update
 
++ 2016-03-07
+
+  Complete README.md.
 + 2016-03-05
 
   `on` and `off` functions now can call in chained.
