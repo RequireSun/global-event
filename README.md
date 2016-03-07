@@ -51,7 +51,7 @@ Remove all the listener functions.
 # Demo
 
 ```javascript
-import { on, off, emit } from 'global-event';
+import { on, emit, off, clear } from 'global-event';
 
 on(
     'logEvent', 
@@ -88,6 +88,9 @@ emit(
     'Third information'
 );
 // no output
+
+clear();
+// all listeners will be removed
 ```
 
 # TODO

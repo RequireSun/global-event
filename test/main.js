@@ -67,4 +67,25 @@ describe('global-event', function () {
                 });
         });
     });
+
+    describe('#on() and clear()', function () {
+        it('No listener will be called.', function (done) {
+            let outterVariable = 0;
+            GlobalEvent.on('test5', function () {
+                ++outterVariable;
+            }).
+                on('test6', function () {
+                    ++outterVariable;
+                }).
+                clear().
+                emit('test5').
+                emit('test6', function () {
+                    if (0 === outterVariable) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                });
+        })
+    });
 });

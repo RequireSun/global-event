@@ -1,10 +1,11 @@
 /**
  * Created by KelvinSen on 2016/1/17.
  */
-import { on, off, emit } from './global-event';
+import { on, emit, off, clear } from './global-event';
 
 export {
     on,
-    off,
     emit,
+    off,
+    clear,
 };
