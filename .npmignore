@@ -6,3 +6,5 @@ lib
 webpack.config.base.js
 webpack.config.development.js
 webpack.config.production.js
+
+npm-debug.log

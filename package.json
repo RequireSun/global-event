@@ -4,8 +4,8 @@
   "description": "A simple event addon.",
   "main": "lib/index.js",
   "scripts": {
+    "test": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
     "clean": "rimraf lib dist",
-    "test": "mocha test/index.js",
     "build:lib": "babel -d lib/ src/",
     "build:umd": "webpack src/index.js dist/global-event.js --config webpack.config.development.js",
     "build:umd:min": "webpack src/index.js dist/global-event.min.js --config webpack.config.production.js",
@@ -26,8 +26,14 @@
     "babel": "^5.5.8",
     "babel-core": "^5.6.18",
     "babel-loader": "^5.1.4",
+    "blanket": "^1.2.2",
     "mocha": "^2.4.5",
     "rimraf": "^2.5.0",
     "webpack": "^1.12.11"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "lib"
+    }
   }
 }
