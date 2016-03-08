@@ -99,6 +99,9 @@ clear();
 
 # Update
 
++ 2016-03-08
+
+  Test Travis-CI.
 + 2016-03-07 _0.3.0_
 
   1. `emit` function now supports chained calls, and the second parameter of `emit` changed to `callback` which will be called after all event listeners be executed.
