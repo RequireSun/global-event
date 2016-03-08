@@ -2,13 +2,13 @@
  * Created by kelvinsun on 2016/3/7.
  */
 'use strict';
-let assert = require('assert'),
+var assert = require('assert'),
     GlobalEvent = require('../lib/index');
 
 describe('global-event', function () {
     describe('#on() and emit()', function () {
         it('The registered function should be emitted', function (done) {
-            let outterVariable = 0;
+            var outterVariable = 0;
             GlobalEvent.on('test', function () {
                 ++outterVariable;
             }).
@@ -22,7 +22,7 @@ describe('global-event', function () {
 
     describe('#on() with parameters', function () {
         it('The input parameter will match the arguments of listener', function (done) {
-            let parameterNumber = 9;
+            var parameterNumber = 9;
             GlobalEvent.on('test2', function (arg1) {
                 if (arg1 === parameterNumber) {
                     done();
@@ -34,7 +34,7 @@ describe('global-event', function () {
 
     describe('#on() and off()', function () {
         it('The registered function should not be emitted', function (done) {
-            let outterVariable = 0;
+            var outterVariable = 0;
             GlobalEvent.on('test3', function () {
                 ++outterVariable;
             }).
@@ -49,7 +49,7 @@ describe('global-event', function () {
 
     describe('#on() and off() with namespace', function () {
         it('The registered function with namespace should be removed.', function (done) {
-            let outterVariable = 0;
+            var outterVariable = 0;
             GlobalEvent.on('test4', function () {
                 ++outterVariable;
             }, null, 'namespace').
@@ -70,7 +70,7 @@ describe('global-event', function () {
 
     describe('#on() and clear()', function () {
         it('No listener will be called.', function (done) {
-            let outterVariable = 0;
+            var outterVariable = 0;
             GlobalEvent.on('test5', function () {
                 ++outterVariable;
             }).
