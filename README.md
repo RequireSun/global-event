@@ -1,4 +1,6 @@
 # global-event
+[![Build Status](https://travis-ci.org/RequireSun/global-event.svg?branch=master)](https://travis-ci.org/RequireSun/global-event)
+
 A simple event addon.
 
 # How to use
