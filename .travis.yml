@@ -13,3 +13,5 @@ matrix:
   allow_failures:
     - node_js: "0.8"
     - node_js: "0.6"
+script: "npm test"
+after_script: "npm install coveralls && cat ./coverage/lcov.info | coveralls"
