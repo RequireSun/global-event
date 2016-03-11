@@ -28,6 +28,7 @@
     "babel-loader": "^5.1.4",
     "blanket": "^1.2.2",
     "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0",
     "rimraf": "^2.5.0",
     "webpack": "^1.12.11"
   },
