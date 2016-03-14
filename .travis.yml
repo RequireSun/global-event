@@ -1,4 +1,5 @@
 language: node_js
+repo_token: COVERALLS.IO_TOKEN
 node_js:
   - "node"
   - "stable"
@@ -14,4 +15,5 @@ matrix:
     - node_js: "0.8"
     - node_js: "0.6"
 script: "npm test"
-after_script: "npm install coveralls && cat ./coverage/lcov.info | coveralls"
+after_script:
+  "npm install coveralls && cat ./coverage/lcov.info | coveralls"
