@@ -4,7 +4,7 @@
   "description": "A simple event addon.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/index.js",
+    "test": "mocha test/index.js && istanbul cover node_modules/mocha/bin/_mocha --report lcovonly --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
     "clean": "rimraf lib dist",
     "build:lib": "babel -d lib/ src/",
@@ -32,10 +32,5 @@
     "mocha-lcov-reporter": "^1.2.0",
     "rimraf": "^2.5.0",
     "webpack": "^1.12.11"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "lib"
-    }
   }
 }

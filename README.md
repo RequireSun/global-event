@@ -1,5 +1,6 @@
 # global-event
 [![Build Status](https://travis-ci.org/RequireSun/global-event.svg?branch=master)](https://travis-ci.org/RequireSun/global-event)
+[![Coverage Status](https://coveralls.io/repos/github/RequireSun/global-event/badge.svg?branch=master)](https://coveralls.io/github/RequireSun/global-event?branch=master)
 
 A simple event addon.
 
