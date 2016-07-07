@@ -24,6 +24,23 @@ Adds a listener function to the specified event.
 
   Namespace of the listener.
      
+## once
+
+Adds a listener function to the specified event which will be emitted only once.
++ __type__ 
+   
+  Name of the event to attach the listener to.
++ __callback__ 
+
+  Method to be called when the event is emitted.
++ __[context]__ 
+
+  Context of the callback function.
+  If it doesn't provide, the function will be executed in the global scope.
++ __[namespace]__
+
+  Namespace of the listener.
+     
 ## emit
 
 + __type__
@@ -54,7 +71,7 @@ Remove all the listener functions.
 # Demo
 
 ```javascript
-import { on, emit, off, clear } from 'global-event';
+import { on, once, emit, off, clear } from 'global-event';
 
 on(
     'logEvent', 
@@ -92,16 +109,31 @@ emit(
 );
 // no output
 
+let number1 = 0;
+once(
+    'addEvent', 
+    () => {
+        ++number1;
+        console.log(number1);
+    }
+).emit(
+    'addEvent'
+).emit(
+    'addEvent'
+);
+// output 1
+// no output
+
 clear();
 // all listeners will be removed
 ```
 
 # TODO
 
-+ Add `once` function.
-
 # Update
++ 2016-07-07
 
+  Add `once` function.
 + 2016-03-08
 
   Test Travis-CI.

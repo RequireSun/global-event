@@ -5,6 +5,10 @@
 
 // 事件队列
 let _events = {};
+/* istanbul ignore next */
+const ToStringObject   = (obj, ...args) => Object.prototype.toString.apply(obj, args);
+// 暂时没用
+//const ToStringFunction = (obj, ...args) => Function.prototype.toString.apply(obj, args);
 /**
  * 事件绑定
  * @param type          事件名
@@ -14,13 +18,26 @@ let _events = {};
  * @returns GlobalEvent 方便链式调用
  */
 export function on (type, callback, context = null, namespace = Date.now()) {
-    '[object Array]' !== Object.prototype.toString.call(_events[type]) && (_events[type] = []);
+    '[object Array]' !== ToStringObject(_events[type]) && (_events[type] = []);
     _events[type].push({
-        namespace: namespace,
+        namespace,
         fn: callback,
-        context: context
+        context,
     });
-    return this;
+    return exports;
+}
+export function once (type, callback, context = null, namespace = Date.now()) {
+    '[object Array]' !== ToStringObject(_events[type]) && (_events[type] = []);
+    const wrappedCallback = (...args) => {
+        off(wrappedCallback);
+        return '[object Function]' === ToStringObject(callback) ? callback.call(...args) : callback;
+    };
+    _events[type].push({
+        namespace,
+        fn: wrappedCallback,
+        context,
+    });
+    return exports;
 }
 /**
  * 事件触发
@@ -34,10 +51,10 @@ export function emit (type, callback, ...args) {
         returnValues = [];
     for (let i = 0, l = e.length; i < l; ++i) {
         let callback = e[i];
-        '[object Function]' === Object.prototype.toString.call(callback.fn) ? returnValues.push(callback.fn.apply(callback.context, args)) : returnValues.push(callback.fn);
+        '[object Function]' === ToStringObject(callback.fn) ? returnValues.push(callback.fn.apply(callback.context, args)) : returnValues.push(callback.fn);
     }
     callback && callback(...returnValues);
-    return this;
+    return exports;
 }
 /**
  * 事件解绑
@@ -47,8 +64,17 @@ export function emit (type, callback, ...args) {
  */
 // TODO: 添加删除所有匿名事件功能
 export function off (type, namespace) {
-    if (namespace) {
-        let e = _events[type] || [];
+    if ('[object Function]' === ToStringObject(type)) {
+        for (let key in _events) {
+            const item = _events[key];
+            for (let i = item.length - 1; -1 < i; --i) {
+                if (type === item[i]['fn']) {
+                    item.splice(i, 1);
+                }
+            }
+        }
+    } else if (namespace) {
+        const e = _events[type] || [];
         for (let i = e.length - 1; -1 < i; --i) {
             if (namespace === e[i]['namespace']) {
                 e.splice(i, 1);
@@ -57,7 +83,7 @@ export function off (type, namespace) {
     } else {
         delete _events[type];
     }
-    return this;
+    return exports;
 }
 /**
  * !危险! 清空全部事件
@@ -65,5 +91,5 @@ export function off (type, namespace) {
  */
 export function clear () {
     _events = {};
-    return this;
+    return exports;
 }

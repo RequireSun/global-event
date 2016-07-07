@@ -2,8 +2,9 @@
  * Created by kelvinsun on 2016/3/7.
  */
 'use strict';
-var assert = require('assert'),
-    GlobalEvent = require('../lib/index');
+const assert      = require('assert');
+const _           = require('lodash');
+const GlobalEvent = require('../lib/index');
 
 describe('global-event', function () {
     describe('#on() and emit()', function () {
@@ -11,11 +12,10 @@ describe('global-event', function () {
             var outterVariable = 0;
             GlobalEvent.on('test', function () {
                 ++outterVariable;
-            }).
-                emit('test', function () {
-                if (1 === outterVariable) {
-                    done();
-                }
+            }).on('test', { a: 1 }).emit('test', function (a, b) {
+                assert.equal(outterVariable, 1);
+                assert.equal(_.isEqual({ a: 1 }, b), true);
+                done();
             });
         });
     });
@@ -37,12 +37,15 @@ describe('global-event', function () {
             var outterVariable = 0;
             GlobalEvent.on('test3', function () {
                 ++outterVariable;
-            }).
-                off('test3').
-                emit('test3', function () {
-                if (0 === outterVariable) {
-                    done();
-                }
+            }).off(
+                'test4', 'abc'
+            ).emit('test3', function () {
+                assert.equal(outterVariable, 1);
+            }).off(
+                'test3'
+            ).emit('test3', function () {
+                assert.equal(outterVariable, 1);
+                done();
             });
         });
     });
@@ -87,5 +90,32 @@ describe('global-event', function () {
                     }
                 });
         })
+    });
+
+    describe('#once()', function () {
+        it('The registered function should be emitted once', function () {
+            var outterVariable = 0;
+            GlobalEvent.once('test', function (a) {
+                outterVariable += a;
+            }).once(
+                'test', { a: 1 }
+            ).emit('test', function (a, b) {
+                assert.equal(outterVariable, 2);
+                assert.equal(_.isEqual({ a: 1 }, b));
+            }, 2).emit('test', function () {
+                assert.equal(outterVariable, 2);
+            }, 2);
+        });
+
+        it('The registered function should be removed by off', function () {
+            var outterVariable = 0;
+            GlobalEvent.once('test', function () {
+                ++outterVariable;
+            }, {}, 'abc').off(
+                'test', 'abc'
+            ).emit('test', function () {
+                assert.equal(outterVariable, 0);
+            });
+        });
     });
 });
