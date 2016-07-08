@@ -131,6 +131,9 @@ clear();
 # TODO
 
 # Update
++ 2016-07-08
+
+  Fix the bug which will make error when users called `once` function.
 + 2016-07-07
 
   Add `once` function.

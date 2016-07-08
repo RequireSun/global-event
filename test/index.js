@@ -12,7 +12,9 @@ describe('global-event', function () {
             var outterVariable = 0;
             GlobalEvent.on('test', function () {
                 ++outterVariable;
-            }).on('test', { a: 1 }).emit('test', function (a, b) {
+            }).on(
+                'test', { a: 1 }
+            ).emit('test', function (a, b) {
                 assert.equal(outterVariable, 1);
                 assert.equal(_.isEqual({ a: 1 }, b), true);
                 done();
@@ -95,25 +97,25 @@ describe('global-event', function () {
     describe('#once()', function () {
         it('The registered function should be emitted once', function () {
             var outterVariable = 0;
-            GlobalEvent.once('test', function (a) {
+            GlobalEvent.once('test7', function (a) {
                 outterVariable += a;
             }).once(
-                'test', { a: 1 }
-            ).emit('test', function (a, b) {
+                'test7', { a: 1 }
+            ).emit('test7', function (a, b) {
                 assert.equal(outterVariable, 2);
-                assert.equal(_.isEqual({ a: 1 }, b));
-            }, 2).emit('test', function () {
+                assert.equal(_.isEqual({ a: 1 }, b), true);
+            }, 2).emit('test7', function () {
                 assert.equal(outterVariable, 2);
             }, 2);
         });
 
         it('The registered function should be removed by off', function () {
             var outterVariable = 0;
-            GlobalEvent.once('test', function () {
+            GlobalEvent.once('test8', function () {
                 ++outterVariable;
             }, {}, 'abc').off(
-                'test', 'abc'
-            ).emit('test', function () {
+                'test8', 'abc'
+            ).emit('test8', function () {
                 assert.equal(outterVariable, 0);
             });
         });

@@ -8,7 +8,7 @@ let _events = {};
 /* istanbul ignore next */
 const ToStringObject   = (obj, ...args) => Object.prototype.toString.apply(obj, args);
 // 暂时没用
-//const ToStringFunction = (obj, ...args) => Function.prototype.toString.apply(obj, args);
+const ToStringFunction = (obj, ...args) => Function.prototype.toString.apply(obj, args);
 /**
  * 事件绑定
  * @param type          事件名
@@ -28,9 +28,10 @@ export function on (type, callback, context = null, namespace = Date.now()) {
 }
 export function once (type, callback, context = null, namespace = Date.now()) {
     '[object Array]' !== ToStringObject(_events[type]) && (_events[type] = []);
-    const wrappedCallback = (...args) => {
+    const wrappedCallback = function (...args) {
+        const returnValue = '[object Function]' === ToStringObject(callback) ? callback.apply(this, args) : callback;
         off(wrappedCallback);
-        return '[object Function]' === ToStringObject(callback) ? callback.call(...args) : callback;
+        return returnValue;
     };
     _events[type].push({
         namespace,
@@ -48,8 +49,9 @@ export function once (type, callback, context = null, namespace = Date.now()) {
  */
 export function emit (type, callback, ...args) {
     let e = _events[type] || [],
-        returnValues = [];
-    for (let i = 0, l = e.length; i < l; ++i) {
+        returnValues = [],
+        l = e.length;
+    for (let i = 0; i < l; e.length === l ? ++i : (l = e.length)) {
         let callback = e[i];
         '[object Function]' === ToStringObject(callback.fn) ? returnValues.push(callback.fn.apply(callback.context, args)) : returnValues.push(callback.fn);
     }
