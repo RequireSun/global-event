@@ -8,7 +8,7 @@ let _events = {};
 /* istanbul ignore next */
 const ToStringObject   = (obj, ...args) => Object.prototype.toString.apply(obj, args);
 // 暂时没用
-const ToStringFunction = (obj, ...args) => Function.prototype.toString.apply(obj, args);
+//const ToStringFunction = (obj, ...args) => Function.prototype.toString.apply(obj, args);
 /**
  * 事件绑定
  * @param type          事件名
