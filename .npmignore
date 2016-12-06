@@ -2,7 +2,6 @@
 coverage
 node_modules
 src
-lib
 test
 
 webpack.config.base.js
